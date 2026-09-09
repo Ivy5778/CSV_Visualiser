@@ -24,6 +24,11 @@
 
 {#if form?.success && form?.csvData && form.csvData.length > 0}
     <h2>CSV Data Visualization</h2>
+    {#if form?.totalRows > form.csvData.length}
+        <p style="color: #ff6600; font-weight: bold;">Showing first {form.csvData.length} of {form.totalRows} rows</p>
+    {:else}
+        <p style="color: #666;">Total rows: {form.totalRows || form.csvData.length}</p>
+    {/if}
     <div style="overflow-x: auto; margin-top: 20px;">
         <table style="border-collapse: collapse; width: 100%;">
             <thead>
@@ -44,6 +49,5 @@
             </tbody>
         </table>
     </div>
-    <p style="margin-top: 10px; color: #666;">Total rows: {form.csvData.length}</p>
 {/if}
 
