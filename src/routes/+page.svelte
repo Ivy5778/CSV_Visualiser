@@ -18,7 +18,32 @@
     <form method="post" action="?/upload" enctype="multipart/form-data">
         <label for="csvFile">Select a CSV file:</label>
         <input type="file" id="csvFile" name="csvFile" accept=".csv"/>
-        <button type ="submit">Upload</button>
+        <button type="submit">Upload</button>
     </form>
 </div>
+
+{#if form?.success && form?.csvData && form.csvData.length > 0}
+    <h2>CSV Data Visualization</h2>
+    <div style="overflow-x: auto; margin-top: 20px;">
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr style="background-color: #f0f0f0;">
+                    {#each Object.keys(form.csvData[0]) as header}
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">{header}</th>
+                    {/each}
+                </tr>
+            </thead>
+            <tbody>
+                {#each form.csvData as row}
+                    <tr>
+                        {#each Object.keys(form.csvData[0]) as header}
+                            <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
+                        {/each}
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    </div>
+    <p style="margin-top: 10px; color: #666;">Total rows: {form.csvData.length}</p>
+{/if}
 

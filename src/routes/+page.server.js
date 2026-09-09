@@ -1,4 +1,5 @@
 import {fail} from '@sveltejs/kit';
+import Papa from 'papaparse';
 
 export const actions = {
     upload: async ({ request }) => {
@@ -9,10 +10,14 @@ export const actions = {
             return fail(400, { error: true });
         }
 
+        const fileText = await file.text();
+        const parsed = Papa.parse(fileText, { header: true });
 
-        console.log(file);
+        if (parsed.errors.length > 0) {
+            return fail(400, { error: true, message: 'Failed to parse CSV' });
+        }
 
-        return { success: true };
+        return { success: true, csvData: parsed.data, fileName: file.name };
     }
 };
 
