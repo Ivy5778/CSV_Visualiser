@@ -14,22 +14,32 @@ export const actions = {
             console.log(`Uploading file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)`);
 
             const fileText = await file.text();
-            const parsed = Papa.parse(fileText, { header: true, dynamicTyping: false });
+            const parsed = Papa.parse(fileText, { 
+                header: true, 
+                dynamicTyping: false,
+                skipEmptyLines: true
+            });
 
+            // Log errors but don't reject - filter out malformed rows
             if (parsed.errors.length > 0) {
-                console.error('CSV parse errors:', parsed.errors);
-                return fail(400, { error: true, message: 'Failed to parse CSV file' });
+                console.warn('CSV parse warnings (skipping malformed rows):', parsed.errors.length);
             }
 
+            // Filter out completely empty rows
+            const validData = parsed.data.filter(row => 
+                Object.values(row).some(v => v !== null && v !== '' && v !== undefined)
+            );
+
             // Return only first 1000 rows to avoid overwhelming the browser
-            const displayData = parsed.data.slice(0, 1000);
-            const totalRows = parsed.data.length;
+            const displayData = validData.slice(0, 1000);
+            const totalRows = validData.length;
 
             console.log(`Successfully parsed ${totalRows} rows, displaying first ${displayData.length}`);
             return { success: true, csvData: displayData, fileName: file.name, totalRows };
         } catch (error) {
             console.error('Upload error:', error);
-            return fail(500, { error: true, message: `Error: ${error.message}` });
+            const message = error instanceof Error ? error.message : 'Unknown error occurred';
+            return fail(500, { error: true, message });
         }
     }
 };
