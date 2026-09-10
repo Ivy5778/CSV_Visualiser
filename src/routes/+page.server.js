@@ -30,7 +30,7 @@ export const actions = {
                 Object.values(row).some(v => v !== null && v !== '' && v !== undefined)
             );
 
-            // Return only first 1000 rows to avoid overwhelming the browser
+            // Return only first 100 rows to avoid overwhelming the browser
             const displayData = validData.slice(0, 1000);
             const totalRows = validData.length;
 
