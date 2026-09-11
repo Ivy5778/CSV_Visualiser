@@ -5,10 +5,32 @@
 </nav>
 
 <script lang="ts">
+    import ApexCharts from 'apexcharts';
     let { form } = $props();
-</script>
 
-<h1>Welcome to FEB Data Analysis Website!</h1>
+    const options = {
+        chart: {
+            type: 'line'
+        },
+        series: [{
+            name: 'INV DC Bus Voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('Voltage'))?.map(row => row["value"]) || []
+        }],
+        xaxis: {
+            categories: [1, 2, 3, 4, 5, 6]
+        }
+    };
+
+    let chart;
+    
+    $effect(() => {
+        if (typeof document !== 'undefined' && document.querySelector('#chart')) {
+            chart = new ApexCharts(document.querySelector('#chart'), options);
+        chart.render();
+        }
+    });
+</script>
+<h1>Voltage Graph</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 <h2>Upload Files</h2>
 
@@ -31,6 +53,8 @@
     </form>
 </div>
 
+<div id="chart"></div>
+
 {#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
     <h2>CSV Data Visualization</h2>
     {#if form.totalRows > form.csvData.length}
@@ -50,7 +74,7 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    {#each form.csvData.filter(row => row.name.includes ("bms_state")) as row (row)}
+                    {#each form.csvData.filter(row => row.name.includes ("Voltage")) as row (row)}
                         <tr>
                             {#each Object.keys(form.csvData[0]) as header}
                                 <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
@@ -64,5 +88,3 @@
         <p style="color: red;">No data to display</p>
     {/if}
 {/if}
-
-

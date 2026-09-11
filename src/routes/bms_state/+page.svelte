@@ -1,6 +1,7 @@
 <nav>
 	<a href="/">home</a>
-	<a href="/Graphs">Graphs</a>
+	<a href="/bms_state">BMS State</a>
+    <a href="/voltage">Voltage</a>
 </nav>
 
 <script lang="ts">
@@ -86,4 +87,4 @@
     {:else}
         <p style="color: red;">No data to display</p>
     {/if}
-{/if}
+{/if}xz
