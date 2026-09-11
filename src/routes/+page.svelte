@@ -1,5 +1,28 @@
 <script lang="ts">
+    import ApexCharts from 'apexcharts';
     let { form } = $props();
+
+    const options = {
+        chart: {
+            type: 'line'
+        },
+        series: [{
+            name: 'bms state',
+            data: form?.csvData?.filter(row => row.name?.includes('bms_state'))?.map(row => row["value"]) || []
+        }],
+        xaxis: {
+            categories: [1, 2, 3, 4, 5]
+        }
+    };
+
+    let chart;
+    
+    $effect(() => {
+        if (typeof document !== 'undefined' && document.querySelector('#chart')) {
+            chart = new ApexCharts(document.querySelector('#chart'), options);
+        chart.render();
+        }
+    });
 </script>
 
 <h1>Welcome to FEB Data Analysis Website!</h1>
@@ -24,39 +47,8 @@
         <button type="submit">Upload</button>
     </form>
 </div>
-{#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
-    <h2>CSV Data Visualization</h2>
-    {#if form.totalRows > form.csvData.length}
-        <p style="color: #ff6600; font-weight: bold;">Showing first {form.csvData.length} of {form.totalRows} rows</p>
-    {:else}
-        <p style="color: #666;">Total rows: {form.totalRows || form.csvData.length}</p>
-    {/if}
-    
-    {#if form.csvData[0]}
-        <div style="overflow-x: auto; margin-top: 20px;">
-            <table style="border-collapse: collapse; width: 100%;">
-                <thead>
-                    <tr style="background-color: #f0f0f0;">
-                        {#each Object.keys(form.csvData[0]) as header}
-                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">{header}</th>
-                        {/each}
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each form.csvData as row (row)}
-                        <tr>
-                            {#each Object.keys(form.csvData[0]) as header}
-                                <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
-                            {/each}
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
-        </div>
-    {:else}
-        <p style="color: red;">No data to display</p>
-    {/if}
-{/if}
+
+<div id="chart"></div>
 
 {#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
     <h2>CSV Data Visualization</h2>
@@ -77,7 +69,7 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    {#each form.csvData.filter(row => row.name.includes ("error")) as row (row)}
+                    {#each form.csvData.filter(row => row.name.includes ("bms_state")) as row (row)}
                         <tr>
                             {#each Object.keys(form.csvData[0]) as header}
                                 <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
@@ -91,3 +83,5 @@
         <p style="color: red;">No data to display</p>
     {/if}
 {/if}
+
+

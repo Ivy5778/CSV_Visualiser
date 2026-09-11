@@ -31,7 +31,7 @@ export const actions = {
             );
 
             // Return only first 100 rows to avoid overwhelming the browser
-            const displayData = validData.slice(0, 1000);
+            const displayData = validData.slice(0, 3000);
             const totalRows = validData.length;
 
             console.log(`Successfully parsed ${totalRows} rows, displaying first ${displayData.length}`);
