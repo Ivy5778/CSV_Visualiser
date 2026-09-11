@@ -14,14 +14,11 @@
             type: 'line'
         },
         series: [{
-            name: 'INV DC Bus Voltage',
-            data: form?.csvData?.filter(row => row.name?.includes('INV_DC_Bus_Voltage'))?.map(row => row["value"]) || []
-        }, {
-            name: 'LV 12V Voltage',
-            data: form?.csvData?.filter(row => row.name?.includes('lv_12v_voltage'))?.map(row => row["value"]) || []
+            name: 'rear',
+            data: form?.csvData?.filter(row => row.name?.includes('rear'))?.map(row => row["value"]) || []
         }],
         xaxis: {
-            categories: [1, 2, 3, 4, 5, 6]
+            categories: [1, 2]
         }
     };
 
@@ -34,7 +31,7 @@
         }
     });
 </script>
-<h1>Voltage Graph</h1>
+<h1>Rear Graph</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 <h2>Upload Files</h2>
 
@@ -78,7 +75,7 @@
                     </tr>
                 </thead>
                 <tbody> 
-                    {#each form.csvData.filter(row => row.name.includes ("Voltage")) as row (row)}
+                    {#each form.csvData.filter(row => row.name.includes ("rear")) as row (row)}
                         <tr>
                             {#each Object.keys(form.csvData[0]) as header}
                                 <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
