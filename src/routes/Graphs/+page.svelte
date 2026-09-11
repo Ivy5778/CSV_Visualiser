@@ -4,10 +4,32 @@
 </nav>
 
 <script lang="ts">
+    import ApexCharts from 'apexcharts';
     let { form } = $props();
-</script>
 
-<h1>Welcome to FEB Data Analysis Website!</h1>
+    const options = {
+        chart: {
+            type: 'line'
+        },
+        series: [{
+            name: 'bms state',
+            data: form?.csvData?.filter(row => row.name?.includes('bms_state'))?.map(row => row["value"]) || []
+        }],
+        xaxis: {
+            categories: [1, 2, 3, 4, 5]
+        }
+    };
+
+    let chart;
+    
+    $effect(() => {
+        if (typeof document !== 'undefined' && document.querySelector('#chart')) {
+            chart = new ApexCharts(document.querySelector('#chart'), options);
+        chart.render();
+        }
+    });
+</script>
+<h1>BMS State Graph</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 <h2>Upload Files</h2>
 
@@ -29,6 +51,8 @@
         <button type="submit">Upload</button>
     </form>
 </div>
+
+<div id="chart"></div>
 
 {#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
     <h2>CSV Data Visualization</h2>
@@ -63,5 +87,3 @@
         <p style="color: red;">No data to display</p>
     {/if}
 {/if}
-
-
