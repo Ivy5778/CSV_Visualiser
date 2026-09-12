@@ -30,9 +30,11 @@ export const actions = {
                 Object.values(row).some(v => v !== null && v !== '' && v !== undefined)
             );
 
-            // Return only first 100 rows to avoid overwhelming the browser
-            const displayData = validData.slice(0, 7000);
+            // Return only first 3000 rows to avoid overwhelming the browser
+            const rows = validData.filter(row => row.name?.includes('rear'))
+            const displayData = validData.slice(0, 3000);
             const totalRows = validData.length;
+
 
             console.log(`Successfully parsed ${totalRows} rows, displaying first ${displayData.length}`);
             return { success: true, csvData: displayData, fileName: file.name, totalRows };

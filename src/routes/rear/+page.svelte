@@ -30,7 +30,10 @@
         chart.render();
         }
     });
+    
+    const minimum_value = Math.min(form?.csvData?.filter(row => row.name?.includes('rear'))?.map(row => row["value"]) || [])
 </script>
+
 <h1>Rear Graph</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 <h2>Upload Files</h2>
@@ -55,6 +58,10 @@
 </div>
 
 <div id="chart"></div>
+
+<div id="minimum_value"></div>
+
+<div> const columnValues = form.csvData.map(row => row.value) </div>
 
 {#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
     <h2>CSV Data Visualization</h2>

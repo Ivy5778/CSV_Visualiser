@@ -31,7 +31,18 @@ export const actions = {
             );
 
             // Return only first 100 rows to avoid overwhelming the browser
-            const displayData = validData.slice(0, 7000);
+           const rows = validData.filter(row => row.name?.includes('INV_DC'))
+           const rows2 = validData.filter(row => row.name?.includes('lv_12v'))
+           const rows3 = validData.filter(row => row.name?.includes('lv_24v'))
+           const rows4 = validData.filter(row => row.name?.includes('INV_Output_Voltage'))
+           const rows5 = validData.filter(row => row.name?.includes('INV_VAB_Vd_Voltage'))
+           const rows6 = validData.filter(row => row.name?.includes('INV_VBC_Vq_Voltage'))
+           const rows7 = validData.filter(row => row.name?.includes('max_cell_voltage'))
+           const rows8 = validData.filter(row => row.name?.includes('min_cell_voltage'))
+           const rows9 = validData.filter(row => row.name?.includes('total_pack_voltage'))
+
+
+            const displayData = [...rows.slice(0, 1000), ...rows2.slice(0, 1000), ...rows3.slice(0, 1000), ...rows4.slice(0, 1000), ...rows5.slice(0, 1000), ...rows6.slice(0, 1000), ...rows7.slice(0, 1000), ...rows8.slice(0, 1000), ...rows9.slice(0,    1000)];
             const totalRows = validData.length;
 
             console.log(`Successfully parsed ${totalRows} rows, displaying first ${displayData.length}`);

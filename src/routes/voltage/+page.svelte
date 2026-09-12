@@ -19,6 +19,29 @@
         }, {
             name: 'LV 12V Voltage',
             data: form?.csvData?.filter(row => row.name?.includes('lv_12v_voltage'))?.map(row => row["value"]) || []
+            }, {
+            name: 'LV 24V Voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('lv_24v_voltage'))?.map(row => row["value"]) || []
+            }, {
+            name: 'INV_Output_Voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('INV_Output_Voltage'))?.map(row => row["value"]) || []
+            }, {
+            name: 'INV_VAB_Vd_Voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('INV_VAB_Vd_Voltage'))?.map(row => row["value"]) || []
+            }, {
+            name: 'INV_VBC_Vq_Voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('INV_VBC_Vq_Voltage'))?.map(row => row["value"]) || []
+            },{
+            name: 'max_cell_voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('max_cell_voltage'))?.map(row => row["value"]) || []
+            },{
+            name: 'min_cell_voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('min_cell_voltage'))?.map(row => row["value"]) || []
+            },{
+            name: 'total_pack_voltage',
+            data: form?.csvData?.filter(row => row.name?.includes('total_pack_voltage'))?.map(row => row["value"]) || []
+
+
         }],
         xaxis: {
             categories: [1, 2, 3, 4, 5, 6]

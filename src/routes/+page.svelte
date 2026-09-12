@@ -1,8 +1,5 @@
 <nav>
 	<a href="/">home</a>
-	<a href="/bms_state">BMS State</a>
-    <a href="/voltage">Voltage</a>
-    <a href="/rear">Rear</a>
 </nav>
 
 <script lang="ts">
@@ -10,60 +7,16 @@
 </script>
 
 <h1>Welcome to FEB Data Analysis Website!</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-<h2>Upload Files</h2>
 
-{#if form?.error}
-    <h2 style="color: red;"> Unable to upload file </h2>
-{/if}
+<h1>Click on the data type you want to visualize from the navigation bar below. :D
+</h1>
 
-{#if form?.success}
-    <h2 style="color: green;">File uploaded successfully!</h2>
-    {#if form?.fileName}
-        <p><strong>File:</strong> {form.fileName}</p>
-    {/if}
-{/if}
+<h1> 🏎️𖦹 ׂ 𓈒 🏁 ／ ⋆ ۪</h1>
 
-<div class='form'>
-    <form method="post" action="?/upload" enctype="multipart/form-data">
-        <label for="csvFile">Select a CSV file:</label>
-        <input type="file" id="csvFile" name="csvFile" accept=".csv"/>
-        <button type="submit">Upload</button>
-    </form>
-</div>
-
-{#if form?.success && form?.csvData && Array.isArray(form.csvData) && form.csvData.length > 0}
-    <h2>CSV Data Visualization</h2>
-    {#if form.totalRows > form.csvData.length}
-        <p style="color: #ff6600; font-weight: bold;">Showing first {form.csvData.length} of {form.totalRows} rows</p>
-    {:else}
-        <p style="color: #666;">Total rows: {form.totalRows || form.csvData.length}</p>
-    {/if}
-    
-    {#if form.csvData[0]}
-        <div style="overflow-x: auto; margin-top: 20px;">
-            <table style="border-collapse: collapse; width: 100%;">
-                <thead>
-                    <tr style="background-color: #f0f0f0;">
-                        {#each Object.keys(form.csvData[0]) as header}
-                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">{header}</th>
-                        {/each}
-                    </tr>
-                </thead>
-                <tbody> 
-                    {#each form.csvData.filter(row => row.name.includes ("bms_state")) as row (row)}
-                        <tr>
-                            {#each Object.keys(form.csvData[0]) as header}
-                                <td style="border: 1px solid #ddd; padding: 8px;">{row[header] || '-'}</td>
-                            {/each}
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
-        </div>
-    {:else}
-        <p style="color: red;">No data to display</p>
-    {/if}
-{/if}
+<nav>
+    <a href="/bms_state">BMS State</a>
+    <a href="/voltage">Voltage</a>
+    <a href="/rear">Rear</a>
+</nav>
 
 
