@@ -41,7 +41,7 @@
 
         }],
         xaxis: {
-            categories: [1, 2, 3, 4, 5, 6]
+            categories: form?.csvData?.filter(row => row.name?.includes('voltage'))?.map(row => row["timestamp"]) || []
         }
     };
 
@@ -55,7 +55,7 @@
     });
 </script>
 <h1>Voltage Graph</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+
 <h2>Upload Files</h2>
 
 {#if form?.error}

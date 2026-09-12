@@ -20,17 +20,14 @@ export const actions = {
                 skipEmptyLines: true
             });
 
-            // Log errors but don't reject - filter out malformed rows
             if (parsed.errors.length > 0) {
                 console.warn('CSV parse warnings (skipping malformed rows):', parsed.errors.length);
             }
 
-            // Filter out completely empty rows
             const validData = parsed.data.filter(row => 
                 Object.values(row).some(v => v !== null && v !== '' && v !== undefined)
             );
 
-            // Return only first 100 rows to avoid overwhelming the browser
            const rows = validData.filter(row => row.name?.includes('INV_DC'))
            const rows2 = validData.filter(row => row.name?.includes('lv_12v'))
            const rows3 = validData.filter(row => row.name?.includes('lv_24v'))

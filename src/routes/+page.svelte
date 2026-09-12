@@ -1,11 +1,3 @@
-<nav>
-	<a href="/">home</a>
-</nav>
-
-<script lang="ts">
-    let { form } = $props();
-</script>
-
 <h1>Welcome to FEB Data Analysis Website!</h1>
 
 <h1>Click on the data type you want to visualize from the navigation bar below. :D

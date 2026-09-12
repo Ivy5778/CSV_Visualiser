@@ -15,7 +15,7 @@
             data: form?.csvData?.filter(row => row.name?.includes('bms_state'))?.map(row => row["value"]) || []
         }],
         xaxis: {
-            categories: [1, 2, 3, 4, 5]
+            categories: form?.csvData?.filter(row => row.name?.includes('bms_state'))?.map(row => row["timestamp"]) || []
         }
     };
 
@@ -29,7 +29,7 @@
     });
 </script>
 <h1>BMS State Graph</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+
 <h2>Upload Files</h2>
 
 {#if form?.error}

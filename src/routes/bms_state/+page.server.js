@@ -20,17 +20,14 @@ export const actions = {
                 skipEmptyLines: true
             });
 
-            // Log errors but don't reject - filter out malformed rows
             if (parsed.errors.length > 0) {
                 console.warn('CSV parse warnings (skipping malformed rows):', parsed.errors.length);
             }
 
-            // Filter out completely empty rows
             const validData = parsed.data.filter(row => 
                 Object.values(row).some(v => v !== null && v !== '' && v !== undefined)
             );
 
-            // Return only first 3000 rows to avoid overwhelming the browser
             const rows = validData.filter(row => row.name?.includes('bms_state'))
             const displayData = rows.slice(0, 3000);
             const totalRows = validData.length;
