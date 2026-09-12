@@ -1,8 +1,5 @@
 <nav>
 	<a href="/">home</a>
-	<a href="/bms_state">BMS State</a>
-    <a href="/voltage">Voltage</a>
-    <a href="/rear">Rear</a>
 </nav>
 
 <script lang="ts">
@@ -14,9 +11,20 @@
             type: 'line'
         },
         series: [{
-            name: 'rear',
-            data: form?.csvData?.filter(row => row.name?.includes('rear'))?.map(row => row["value"]) || []
-        }],
+            name: 'linear potentiometer 1 rear',
+            data: form?.csvData?.filter(row => row.name?.includes('linear_potentiometer_1_rear'))?.map(row => row["value"]) || []
+            }, {
+            name: 'linear potentiometer 2 rear',
+            data: form?.csvData?.filter(row => row.name?.includes('linear_potentiometer_2_rear'))?.map(row => row["value"]) || []
+            }
+            ,{
+            name: 'wss left rear',
+            data: form?.csvData?.filter(row => row.name?.includes('wss_left_rear'))?.map(row => row["value"]) || []
+            }
+        ,{
+            name: 'wss right rear',
+            data: form?.csvData?.filter(row => row.name?.includes('wss_right_rear'))?.map(row => row["value"]) || []
+            }],
         xaxis: {
             categories: [1, 2]
         }

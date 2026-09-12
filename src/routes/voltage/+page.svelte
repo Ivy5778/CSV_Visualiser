@@ -1,8 +1,5 @@
 <nav>
 	<a href="/">home</a>
-	<a href="/bms_state">BMS State</a>
-    <a href="/voltage">Voltage</a>
-    <a href="/rear">Rear</a>
 </nav>
 
 <script lang="ts">

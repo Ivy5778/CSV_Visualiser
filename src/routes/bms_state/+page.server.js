@@ -32,7 +32,7 @@ export const actions = {
 
             // Return only first 3000 rows to avoid overwhelming the browser
             const rows = validData.filter(row => row.name?.includes('bms_state'))
-            const displayData = validData.slice(0, 3000);
+            const displayData = rows.slice(0, 3000);
             const totalRows = validData.length;
 
             console.log(`Successfully parsed ${totalRows} rows, displaying first ${displayData.length}`);

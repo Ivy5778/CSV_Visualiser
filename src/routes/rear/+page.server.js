@@ -31,8 +31,11 @@ export const actions = {
             );
 
             // Return only first 3000 rows to avoid overwhelming the browser
-            const rows = validData.filter(row => row.name?.includes('rear'))
-            const displayData = validData.slice(0, 3000);
+            const rows = validData.filter(row => row.name?.includes('linear_potentiometer_1_rear'))
+            const rows2 = validData.filter(row => row.name?.includes('linear_potentiometer_2_rear'))
+            const rows3 = validData.filter(row => row.name?.includes('wss_left_rear'))
+            const rows4 = validData.filter(row => row.name?.includes('wss_right_rear'))
+            const displayData = [...rows.slice(0, 1000), ...rows2.slice(0, 1000), ...rows3.slice(0, 1000), ...rows4.slice(0, 1000)];
             const totalRows = validData.length;
 
 
